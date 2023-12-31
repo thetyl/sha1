@@ -22,6 +22,7 @@
 
 #include <string>
 #include <sstream>
+#include <iomanip>
 
 uint32_t circular_shift_left(uint32_t x, int count) {
 	return (x << count) | (x >> (32 - count));
@@ -118,7 +119,13 @@ std::string sha1(const std::string &message) {
 	}
 
 	std::stringstream ss;
-	ss << std::hex << h[0] << h[1] << h[2] << h[3] << h[4];
+	ss.fill('0');
+	ss << std::hex;
+	ss << std::setw(8) << h[0];
+	ss << std::setw(8) << h[1];
+	ss << std::setw(8) << h[2];
+	ss << std::setw(8) << h[3];
+	ss << std::setw(8) << h[4];
 
 	return ss.str();
 }
